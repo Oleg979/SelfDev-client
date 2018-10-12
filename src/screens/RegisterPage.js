@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import history from "../components/history";
 
 export default class RegisterPage extends Component {
   state = {
@@ -6,7 +8,12 @@ export default class RegisterPage extends Component {
     pass: null,
     name: null,
     repeatPass: null,
-    result: ""
+    needsVerify: false,
+    error: ""
+  };
+
+  componentDidMount = () => {
+    if (localStorage.getItem("token")) history.push("/");
   };
 
   register = () => {
@@ -29,7 +36,10 @@ export default class RegisterPage extends Component {
       .then(data => {
         console.log(data);
         if (!data.auth) this.setState({ result: data.text });
-        else this.setState({ result: data.text });
+        else {
+          localStorage.setItem("email", this.state.login);
+          history.push("/verify");
+        }
       });
   };
 
@@ -40,6 +50,7 @@ export default class RegisterPage extends Component {
 
   render = () => (
     <div>
+      <h1>Register</h1>
       <input
         type="text"
         placeholder="Your name"
@@ -62,6 +73,7 @@ export default class RegisterPage extends Component {
       />
       <button onClick={() => this.register()}>Sign up</button>
       <p>{this.state.result}</p>
+      <Link to="/login">Log in</Link>
     </div>
   );
 }

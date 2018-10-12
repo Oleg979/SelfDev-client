@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import history from "../components/history";
 
 export default class LoginPage extends Component {
   state = {
     login: null,
     pass: null,
     result: ""
+  };
+
+  componentDidMount = () => {
+    if (localStorage.getItem("token")) history.push("/");
   };
 
   logIn = () => {
@@ -22,7 +28,10 @@ export default class LoginPage extends Component {
       .then(data => {
         console.log(data);
         if (!data.auth) this.setState({ result: data.text });
-        else this.setState({ result: data.token });
+        else {
+          localStorage.setItem("token", data.token);
+          history.push("/");
+        }
       });
   };
 
@@ -31,6 +40,7 @@ export default class LoginPage extends Component {
 
   render = () => (
     <div>
+      <h1>Log in</h1>
       <input
         type="text"
         placeholder="Your email"
@@ -43,6 +53,7 @@ export default class LoginPage extends Component {
       />
       <button onClick={() => this.logIn()}>Log in</button>
       <p>{this.state.result}</p>
+      <Link to="/register">Sign up</Link>
     </div>
   );
 }
