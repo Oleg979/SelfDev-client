@@ -5,7 +5,8 @@ export default class TaskTable extends Component {
   state = {
     tasks: [],
     text: "",
-    time: ""
+    hours: "",
+    minutes: ""
   };
 
   getTasks = () =>
@@ -26,13 +27,13 @@ export default class TaskTable extends Component {
   };
 
   changeText = text => this.setState({ text });
-  changeTime = time => this.setState({ time });
+  changeHours = hours => this.setState({ hours });
+  changeMinutes = minutes => this.setState({ minutes });
 
   add = () => {
-    let [hour, minutes] = this.state.time.split(":");
     let date = new Date();
-    date.setHours(+hour);
-    date.setMinutes(+minutes);
+    date.setHours(+this.state.hours);
+    date.setMinutes(+this.state.minutes);
     fetch("http://localhost:3000/push/send", {
       method: "POST",
       headers: {
@@ -52,13 +53,14 @@ export default class TaskTable extends Component {
       },
       body: JSON.stringify({
         text: this.state.text,
-        time: this.state.time
+        time: `${this.state.hours}:${this.state.minutes}`
       })
     }).then(data => {
       this.getTasks();
       this.setState({
         text: "",
-        time: ""
+        hours: "",
+        minutes: ""
       });
     });
   };
@@ -96,10 +98,19 @@ export default class TaskTable extends Component {
         onChange={e => this.changeText(e.target.value)}
       />
       <input
-        type="text"
-        placeholder="time"
-        value={this.state.time}
-        onChange={e => this.changeTime(e.target.value)}
+        className="time"
+        type="number"
+        placeholder="hours"
+        value={this.state.hours}
+        onChange={e => this.changeHours(e.target.value)}
+      />
+      :
+      <input
+        className="time"
+        type="number"
+        placeholder="min"
+        value={this.state.minutes}
+        onChange={e => this.changeMinutes(e.target.value)}
       />
       <button onClick={this.add}>Add</button>
       <br />
