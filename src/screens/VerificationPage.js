@@ -15,6 +15,7 @@ export default class VerificationPage extends Component {
   handleCodeChange = code => this.setState({ code });
 
   verify = () => {
+    this.setState({ result: "Loading..." });
     fetch("http://localhost:3000/auth/verify", {
       method: "POST",
       headers: {

@@ -2,3 +2,7 @@ input,
 button {
   display: block;
 }
+
+a.delete {
+  cursor: pointer;
+}

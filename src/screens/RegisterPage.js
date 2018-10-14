@@ -17,6 +17,7 @@ export default class RegisterPage extends Component {
   };
 
   register = () => {
+    this.setState({ result: "Loading..." });
     if (this.state.pass != this.state.repeatPass) {
       this.setState({ result: "Passwords dont matches." });
       return;

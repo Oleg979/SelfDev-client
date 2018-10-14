@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import history from "../components/history";
+import TaskTable from "../components/TaskTable";
 
 export default class HomePage extends Component {
   state = {
-    user: {}
+    user: {},
+    loading: true
   };
 
   componentDidMount = () => {
+    this.setState({ loading: true });
     if (!localStorage.getItem("token")) return history.push("/login");
     fetch("http://localhost:3000/auth/me", {
       headers: {
@@ -19,7 +22,7 @@ export default class HomePage extends Component {
           localStorage.removeItem("token");
           return history.push("/login");
         }
-        this.setState({ user: user.user });
+        this.setState({ user: user.user, loading: false });
       });
   };
 
@@ -34,8 +37,14 @@ export default class HomePage extends Component {
   render = () => (
     <div>
       <h1>Home page</h1>
-      <p>{JSON.stringify(this.state.user)}</p>
-      <button onClick={this.logout}>Logout</button>
+      {this.state.loading && <h2>Loading...</h2>}
+      {!this.state.loading && (
+        <div>
+          <p>Hello, {this.state.user.name}!</p>
+          <TaskTable />
+          <button onClick={this.logout}>Logout</button>
+        </div>
+      )}
     </div>
   );
 }

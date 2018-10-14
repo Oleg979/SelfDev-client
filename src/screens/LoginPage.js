@@ -14,6 +14,7 @@ export default class LoginPage extends Component {
   };
 
   logIn = () => {
+    this.setState({ result: "Loading..." });
     fetch("http://localhost:3000/auth/login", {
       method: "POST",
       headers: {
