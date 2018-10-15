@@ -11,3 +11,7 @@ input.time {
   display: inline;
   width: 6%;
 }
+
+input[type="checkbox"] {
+  display: inline;
+}
