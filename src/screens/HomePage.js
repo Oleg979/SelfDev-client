@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import history from "../components/history";
 import TaskTable from "../components/TaskTable";
+import Stats from "../components/Stats";
 
 export default class HomePage extends Component {
   state = {
@@ -43,6 +44,7 @@ export default class HomePage extends Component {
           <p>Hello, {this.state.user.name}!</p>
           <TaskTable />
           <button onClick={this.logout}>Logout</button>
+          <Stats />
         </div>
       )}
     </div>
