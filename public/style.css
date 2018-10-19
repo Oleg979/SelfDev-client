@@ -2,9 +2,8 @@ input,
 button {
   display: block;
 }
-
-a.delete {
-  cursor: pointer;
+body {
+  background-color: #efe6e6;
 }
 
 input.time {
@@ -13,5 +12,110 @@ input.time {
 }
 
 input[type="checkbox"] {
-  display: inline;
+  opacity: 1 !important;
+  pointer-events: all !important;
+  display: inline !important;
+  position: initial !important;
+}
+
+.login {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.login h1,
+.login h5,
+.login h4 {
+  text-align: center;
+}
+
+.task:first-of-type {
+  margin-top: 40px;
+}
+
+.login-row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.btns a {
+  margin: 10px;
+}
+
+.input-field {
+  width: 100% !important;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+}
+
+.brand-logo {
+  margin-left: 10px;
+}
+
+.brand-logo b {
+  margin-left: 10px;
+}
+
+.brand-logo img {
+  display: block;
+  width: 80%;
+  margin-top: 5px;
+}
+.logo {
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  background-color: #4db6ac;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 1.3em;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.task-info,
+.task-methods {
+  display: flex;
+}
+
+.task .tag {
+  margin-right: 10px;
+  font-weight: 900;
+}
+
+.task .text {
+  margin-right: 10px;
+}
+
+.task .time {
+  margin-right: 10px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.delete {
+  cursor: pointer;
+  color: red;
+  font-weight: 700;
+  transition: all 0.2s linear;
+}
+
+.delete:hover {
+  transition: all 0.2s linear;
+  transform: scale(1.5, 1.5);
+}
+
+.add-task {
+  display: block !important;
+  margin: 0 auto;
+  width: 22%;
 }

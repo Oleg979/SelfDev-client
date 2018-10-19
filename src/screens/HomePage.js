@@ -37,14 +37,42 @@ export default class HomePage extends Component {
 
   render = () => (
     <div>
-      <h1>Home page</h1>
-      {this.state.loading && <h2>Loading...</h2>}
+      {this.state.loading && (
+        <div class="preloader-wrapper active">
+          <div class="spinner-layer spinner-green-only">
+            <div class="circle-clipper left">
+              <div class="circle" />
+            </div>
+            <div class="gap-patch">
+              <div class="circle" />
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle" />
+            </div>
+          </div>
+        </div>
+      )}
       {!this.state.loading && (
         <div>
-          <p>Hello, {this.state.user.name}!</p>
+          <nav>
+            <div class="nav-wrapper ">
+              <a href="#" class="brand-logo">
+                <img src="logo1.png" />
+              </a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li className="active">
+                  <a>Tasks</a>
+                </li>
+                <li>
+                  <a>Statistics</a>
+                </li>
+                <li>
+                  <a onClick={this.logout}>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
           <TaskTable />
-          <button onClick={this.logout}>Logout</button>
-          <Stats />
         </div>
       )}
     </div>

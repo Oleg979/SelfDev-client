@@ -19,12 +19,12 @@ export default class Stats extends Component {
   render = () => (
     <div>
       {this.state.stat.map(stat => (
-        <h1>
+        <h1 key={stat._id}>
           {stat.fullDate
             .split(" ")
             .slice(0, 2)
             .join(".")}
-          : {stat.done}/{stat.all}
+          : done {stat.done} tasks of {stat.all}
         </h1>
       ))}
     </div>
