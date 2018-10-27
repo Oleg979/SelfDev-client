@@ -6,7 +6,8 @@ import Stats from "../components/Stats";
 export default class HomePage extends Component {
   state = {
     user: {},
-    loading: true
+    loading: true,
+    page: "Tasks"
   };
 
   componentDidMount = () => {
@@ -35,10 +36,12 @@ export default class HomePage extends Component {
     });
   };
 
+  changePage = page => this.setState({ page });
+
   render = () => (
     <div>
       {this.state.loading && (
-        <div class="preloader-wrapper active">
+        <div class="preloader-wrapper active spinner">
           <div class="spinner-layer spinner-green-only">
             <div class="circle-clipper left">
               <div class="circle" />
@@ -60,10 +63,16 @@ export default class HomePage extends Component {
                 <img src="logo1.png" />
               </a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li className="active">
+                <li
+                  className={this.state.page == "Tasks" ? "active" : ""}
+                  onClick={() => this.changePage("Tasks")}
+                >
                   <a>Tasks</a>
                 </li>
-                <li>
+                <li
+                  className={this.state.page == "Tasks" ? "" : "active"}
+                  onClick={() => this.changePage("Stats")}
+                >
                   <a>Statistics</a>
                 </li>
                 <li>
@@ -72,7 +81,7 @@ export default class HomePage extends Component {
               </ul>
             </div>
           </nav>
-          <TaskTable />
+          {this.state.page == "Tasks" ? <TaskTable /> : <Stats />}
         </div>
       )}
     </div>

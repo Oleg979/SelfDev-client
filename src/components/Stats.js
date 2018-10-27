@@ -16,17 +16,34 @@ export default class Stats extends Component {
       .then(stat => this.setState({ stat: stat.stats }))
       .catch(e => history.push("/login"));
   };
-  render = () => (
-    <div>
-      {this.state.stat.map(stat => (
-        <h1 key={stat._id}>
-          {stat.fullDate
-            .split(" ")
-            .slice(0, 2)
-            .join(".")}
-          : done {stat.done} tasks of {stat.all}
-        </h1>
+
+  renderStat = stat => (
+    <div className="stat">
+      <b>
+        {stat.fullDate
+          .split(" ")
+          .slice(0, 2)
+          .join(".")}
+        :
+      </b>{" "}
+      done <i>{stat.done}</i> of <i>{stat.all}</i> tasks
+      {stat.tasks.filter(task => task.isChecked).map(task => (
+        <div class="done_task">
+          <b>+ {task.text}</b>
+        </div>
       ))}
+      {stat.tasks.filter(task => !task.isChecked).map(task => (
+        <div class="undone_task">
+          <b>- {task.text}</b>
+        </div>
+      ))}
+    </div>
+  );
+
+  render = () => (
+    <div className="login">
+      <h4>Statistics</h4>
+      {this.state.stat.reverse().map(this.renderStat)}
     </div>
   );
 }

@@ -82,6 +82,15 @@ input[type="checkbox"] {
   margin-bottom: 15px;
 }
 
+.stat {
+  background-color: #4db6ac;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 1.3em;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
 .task-info,
 .task-methods {
   display: flex;
@@ -118,4 +127,22 @@ input[type="checkbox"] {
   display: block !important;
   margin: 0 auto;
   width: 22%;
+}
+
+.spinner {
+  display: block !important;
+  margin: 0 auto !important;
+  margin-top: 250px !important;
+}
+
+.collapsible-body {
+  display: block;
+}
+
+.done_task {
+  color: green;
+}
+
+.undone_task {
+  color: red;
 }
